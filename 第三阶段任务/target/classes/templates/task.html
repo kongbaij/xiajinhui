@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html %@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>赛事</title>
+    <script src="https://cdn.jsdelivr.net/jstl/1.2.1/jstl.min.js"></script>
+
+</head>
+<body>
+<div>
+    <style>
+        h1 {
+            color: #337ab7;
+            font-size: 30px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #555;
+            font-size: 30px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: #888;
+            font-size: 30px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+    </style>
+
+
+    <h1>赛事管理表单</h1>
+    <h2>2023年度校运会</h2>
+    <h3>主办方湖南文理学院</h3>
+
+    <div class="form-container">
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: Arial, sans-serif;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            tr:hover {
+                background-color: #f5f5f5;
+            }
+        </style>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>专业</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="sp:${sps}">
+                <td th:text="${sp.id}"
+                </td>
+                <td th:text="${sp.name}"
+                </td>
+                <td th:text="${sp.major}"
+                </td>
+                <td th:text="${sp.description}"
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" th:href="@{/edit1/{id}(id=${sp.id})}">编辑</a>
+
+                    <button th:attr="url=@{delete/{id}(id=${sp.id})}" type="submit"
+                            class="btn btn-sm btn-danger deletebtn">删除
+                    </button>
+                </td>
+            </tr>
+            </thead>
+        </table>
+        <div style="display: flex; justify-content: flex-end;">
+            <a class="btn btn-sm btn-success" th:href="@{/add1}">添加运动员</a>
+        </div>
+    </div>
+    <form id="de" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(".deletebtn").click(function () {
+        $("#de").attr("action", $(this).attr("url")).submit();
+        return false;
+    })
+
+</script>
+
+
+</body>
+</html>

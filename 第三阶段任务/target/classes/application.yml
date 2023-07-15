@@ -1,0 +1,10 @@
+server:
+  port: 8083
+spring:
+  thymeleaf:
+    cache: false
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled=true:
